@@ -1,0 +1,9 @@
+.container{
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+}
+
+.box{
+  border: 1px solid black;
+  width: 200px;
+}
