@@ -2,114 +2,60 @@ import { useState } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMicrophone } from '@fortawesome/free-solid-svg-icons'
+import youtubeLinks from './Data/youtubeSaude.json'
+import exatas from './Data/exatas.json'
+import DivColapsavel from './components/DivColapsavel'
 
 function App() {
   const [insertedTxt, setInsertedTxt] = useState("");
-  const termosMedicos = [
-    { termo: "acidente vascular cerebral (AVC)", url: "https://youtu.be/6Qz14iVMwZI?t=6" },
-    { termo: "adoecer", url: "https://youtu.be/6Qz14iVMwZI?t=10" },
-    { termo: "aferir pressão arterial", url: "https://youtu.be/6Qz14iVMwZI?t=16" },
-    { termo: "aferir temperatura", url: "https://youtu.be/6Qz14iVMwZI?t=21" },
-    { termo: "amigdalite", url: "https://youtu.be/6Qz14iVMwZI?t=31" },
-    { termo: "anemia", url: "https://youtu.be/6Qz14iVMwZI?t=36" },
-    { termo: "arrepio", url: "https://youtu.be/6Qz14iVMwZI?t=44" },
-    { termo: "arritmia", url: "https://youtu.be/6Qz14iVMwZI?t=49" },
-    { termo: "asma", url: "https://youtu.be/6Qz14iVMwZI?t=54" },
-    { termo: "assistente social", url: "https://youtu.be/6Qz14iVMwZI?t=60" },
-    { termo: "audiometria", url: "https://youtu.be/6Qz14iVMwZI?t=67" },
-    { termo: "aumento de peso", url: "https://youtu.be/6Qz14iVMwZI?t=74" },
-    { termo: "auxiliar de enfermagem", url: "https://youtu.be/6Qz14iVMwZI?t=79" },
-    { termo: "biópsia", url: "https://youtu.be/6Qz14iVMwZI?t=85" },
-    { termo: "bronquite", url: "https://youtu.be/6Qz14iVMwZI?t=92" },
-    { termo: "calafrio", url: "https://youtu.be/6Qz14iVMwZI?t=96" },
-    { termo: "cálculo renal", url: "https://youtu.be/6Qz14iVMwZI?t=99" },
-    { termo: "calendário de vacinação", url: "https://youtu.be/6Qz14iVMwZI?t=102" },
-    { termo: "cansaço", url: "https://youtu.be/6Qz14iVMwZI?t=113" },
-    { termo: "muco ou 'catarro'", url: "https://youtu.be/6Qz14iVMwZI?t=116" },
-    { termo: "prurido ou 'coceira'", url: "https://youtu.be/6Qz14iVMwZI?t=120" },
-    { termo: "cólica", url: "https://youtu.be/6Qz14iVMwZI?t=124" },
-    { termo: "colonoscopia", url: "https://youtu.be/6Qz14iVMwZI?t=128" },
-    { termo: "congestão nasal", url: "https://youtu.be/6Qz14iVMwZI?t=135" },
-    { termo: "coriza", url: "https://youtu.be/6Qz14iVMwZI?t=139" },
-    { termo: "cuidador", url: "https://youtu.be/6Qz14iVMwZI?t=143" },
-    { termo: "diarreia", url: "https://youtu.be/6Qz14iVMwZI?t=149" },
-    { termo: "dentista", url: "https://youtu.be/6Qz14iVMwZI?t=155" },
-    { termo: "desmaio ou síncope", url: "https://youtu.be/6Qz14iVMwZI?t=159" },
-    { termo: "doença", url: "https://youtu.be/6Qz14iVMwZI?t=164" },
-    { termo: "doente", url: "https://youtu.be/6Qz14iVMwZI?t=167" },
-    { termo: "dor", url: "https://youtu.be/6Qz14iVMwZI?t=171" },
-    { termo: "dor de barriga", url: "https://youtu.be/6Qz14iVMwZI?t=176" },
-    { termo: "ecocardiograma", url: "https://youtu.be/6Qz14iVMwZI?t=181" },
-    { termo: "eletrocardiograma", url: "https://youtu.be/6Qz14iVMwZI?t=191" },
-    { termo: "eletroencefalograma", url: "https://youtu.be/6Qz14iVMwZI?t=199" },
-    { termo: "endoscopia", url: "https://youtu.be/6Qz14iVMwZI?t=207" },
-    { termo: "espirro", url: "https://youtu.be/6Qz14iVMwZI?t=214" },
-    { termo: "exame de colesterol", url: "https://youtu.be/6Qz14iVMwZI?t=218" },
-    { termo: "exame de gravidez", url: "https://youtu.be/6Qz14iVMwZI?t=227" },
-    { termo: "exame de fezes", url: "https://youtu.be/6Qz14iVMwZI?t=233" },
-    { termo: "exame de glicemia", url: "https://youtu.be/6Qz14iVMwZI?t=240" },
-    { termo: "exame de HIV", url: "https://youtu.be/6Qz14iVMwZI?t=247" },
-    { termo: "exame médico", url: "https://youtu.be/6Qz14iVMwZI?t=255" },
-    { termo: "exame papanicolau", url: "https://youtu.be/6Qz14iVMwZI?t=260" },
-    { termo: "exame pré-natal", url: "https://youtu.be/6Qz14iVMwZI?t=268" },
-    { termo: "exame de próstata", url: "https://youtu.be/6Qz14iVMwZI?t=275" },
-    { termo: "exame do pezinho", url: "https://youtu.be/6Qz14iVMwZI?t=284" },
-    { termo: "exame de sangue", url: "https://youtu.be/6Qz14iVMwZI?t=294" },
-    { termo: "exame de urina", url: "https://youtu.be/6Qz14iVMwZI?t=302" },
-    { termo: "exame de ultrassonografia", url: "https://youtu.be/6Qz14iVMwZI?t=311" },
-    { termo: "falta de ar ou dispneia", url: "https://youtu.be/6Qz14iVMwZI?t=316" },
-    { termo: "febre", url: "https://youtu.be/6Qz14iVMwZI?t=322" },
-    { termo: "ferida", url: "https://youtu.be/6Qz14iVMwZI?t=326" },
-    { termo: "fonoaudiólogo", url: "https://youtu.be/6Qz14iVMwZI?t=330" },
-    { termo: "fraqueza ou astenia", url: "https://youtu.be/6Qz14iVMwZI?t=334" },
-    { termo: "fratura", url: "https://youtu.be/6Qz14iVMwZI?t=336" },
-    { termo: "gripe", url: "https://youtu.be/6Qz14iVMwZI?t=341" },
-    { termo: "hemodiálise", url: "https://youtu.be/6Qz14iVMwZI?t=343" },
-    { termo: "hemograma", url: "https://youtu.be/6Qz14iVMwZI?t=351" },
-    { termo: "hepatite", url: "https://youtu.be/6Qz14iVMwZI?t=360" }
-  ];
-
 
   return (
-    <>
-      <h1>Glossário de Libras</h1>
-      <div className="container">
-        <div className='box'>
-          <span>Dicionários públicos</span>
-          <div className=''>
-
-
-            <div className='container-small'>
-              {
-                termosMedicos.map(termo => <>
-                  <div className='box'>
-                    {termo.termo}
+    <div className="p-4"> {/* Adicionado padding geral */}
+      <h1 className="text-2xl font-bold mb-4">Glossário de Libras</h1>
+      
+      <div className="grid grid-cols-3 gap-4"> {/* Substituído .container por classes do Tailwind */}
+        <div className='bg-gray-100 p-4 rounded'> {/* Substituído .box por classes do Tailwind */}
+          <span className="font-semibold">Dicionários públicos</span>
+          <div className='mt-2'>
+            <DivColapsavel title="Ciências Exatas">
+              {exatas.map((e, index) => (
+                <div key={index} className='grid grid-cols-2 gap-2 w-full md:w-1/3 mb-2'> {/* Adaptado .container-small */}
+                  <div className='bg-white p-2 rounded'>{e.termo}</div>
+                  <div className='bg-white p-2 rounded'>
+                    <a href={e.url} target='_blank' rel="noopener noreferrer" className="text-blue-500 hover:underline">{e.url}</a>
                   </div>
-                  <div className='box'>
-                    <a href={termo.url} target='_blank'>{termo.url}</a>
+                </div>
+              ))}
+            </DivColapsavel>
 
+            <DivColapsavel title="Saúde">
+              {/* Conteúdo similar ao das Ciências Exatas, adapte conforme necessário */}
+              {youtubeLinks.map((e, index) => (
+                <div key={index} className='grid grid-cols-2 gap-2 w-full md:w-1/3 mb-2'> {/* Adaptado .container-small */}
+                  <div className='bg-white p-2 rounded'>{e.termo}</div>
+                  <div className='bg-white p-2 rounded'>
+                    <a href={e.url} target='_blank' rel="noopener noreferrer" className="text-blue-500 hover:underline">{e.url}</a>
                   </div>
-                </>)
-              }
-            </div>
+                </div>
+              ))}
+            </DivColapsavel>
           </div>
         </div>
-        <div className="box">
-          <label>Palavra</label>
+        <div className="bg-gray-100 p-4 rounded">
+          <label className="block mb-2">Palavra</label>
           <input
             type='text'
             value={insertedTxt}
             onChange={e => setInsertedTxt(e.target.value)}
-          >
-          </input>
-          <FontAwesomeIcon icon={faMicrophone} />
-
+            className="w-full p-2 border rounded"
+          />
+          <FontAwesomeIcon icon={faMicrophone} className="mt-2" />
         </div>
-        <div className='box'>
+        <div className='bg-gray-100 p-4 rounded'>
           {insertedTxt}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
